@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  homeViewController.swift
 //  Grocery_Manager
 //
 //  Created by matheusvb on 19/05/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class homeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @objc func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models.count
     }
@@ -22,33 +22,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print ("aa")
     }
     
-    
+
     @IBOutlet var tableView: UITableView!
+    
     private var models = [ProductList]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapRef))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
         navigationItem.rightBarButtonItem?.tintColor = .red
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         getAllProducts()
+        
+        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getAllProducts()
     }
-
-    @objc private func didTapRef() {
+    
+    @objc private func didTapAdd() {
         return
     }
-
-    //-----------CORE DATA -------------
     
+    
+    //------------CORE DATA---------------
+
     func getAllProducts() {
         do {
             models = try context.fetch(ProductList.fetchRequest())
@@ -120,6 +125,4 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    
 }
-
