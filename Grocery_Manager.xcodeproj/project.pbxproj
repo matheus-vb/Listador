@@ -18,6 +18,7 @@
 		8623F1E12836A1D000E824B1 /* reqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8623F1E02836A1D000E824B1 /* reqViewController.swift */; };
 		86E44F552836A943006875AC /* ProductList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E44F532836A943006875AC /* ProductList+CoreDataClass.swift */; };
 		86E44F562836A943006875AC /* ProductList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E44F542836A943006875AC /* ProductList+CoreDataProperties.swift */; };
+		86E44F582836B7B1006875AC /* tempViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E44F572836B7B1006875AC /* tempViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		8623F1E02836A1D000E824B1 /* reqViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reqViewController.swift; sourceTree = "<group>"; };
 		86E44F532836A943006875AC /* ProductList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		86E44F542836A943006875AC /* ProductList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		86E44F572836B7B1006875AC /* tempViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tempViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				8623F1DE2836A1C600E824B1 /* homeViewController.swift */,
 				8623F1E02836A1D000E824B1 /* reqViewController.swift */,
 				8623F1CB28369B4C00E824B1 /* ViewController.swift */,
+				86E44F572836B7B1006875AC /* tempViewController.swift */,
 				8623F1CD28369B4C00E824B1 /* Main.storyboard */,
 				8623F1D328369B4D00E824B1 /* Assets.xcassets */,
 				8623F1D528369B4D00E824B1 /* LaunchScreen.storyboard */,
@@ -156,6 +159,7 @@
 				8623F1CC28369B4C00E824B1 /* ViewController.swift in Sources */,
 				8623F1D228369B4C00E824B1 /* Grocery_Manager.xcdatamodeld in Sources */,
 				8623F1C828369B4C00E824B1 /* AppDelegate.swift in Sources */,
+				86E44F582836B7B1006875AC /* tempViewController.swift in Sources */,
 				8623F1E12836A1D000E824B1 /* reqViewController.swift in Sources */,
 				86E44F552836A943006875AC /* ProductList+CoreDataClass.swift in Sources */,
 				8623F1DF2836A1C600E824B1 /* homeViewController.swift in Sources */,

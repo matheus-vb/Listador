@@ -13,15 +13,50 @@ class reqViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let model = models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
     
+        cell.textLabel?.text = model.name
+        cell.textLabel?.font = .boldSystemFont(ofSize: 15)
+        cell.detailTextLabel?.text = ("\(model.qtdReq)")
+        cell.detailTextLabel?.font = .systemFont(ofSize: 14)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print ("aa")
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let product = models[indexPath.row]
+        let alert = UIAlertController(title: "Editar", message: nil, preferredStyle: .alert)
+        alert.addTextField(configurationHandler: { field in
+            field.placeholder = "Nova quantidade"
+            field.keyboardType = .numberPad
+        })
+        
+        alert.addAction(UIAlertAction(title: "Confirmar", style: .cancel, handler: { [weak self] _ in
+            guard let field = alert.textFields?.first, let text = field.text, !text.isEmpty else {
+                return
+            }
+            
+            let qtd = Int32(text ?? " ") ?? 0
+            self?.changeQtd(product: product, qtd: qtd)
+        }))
+        
+        self.present(alert, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let product = models[indexPath.row]
+        tableView.beginUpdates()
+        removeProduct(product: product)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        tableView.endUpdates()
+    }
     
     @IBOutlet var tableView: UITableView!
     private var models = [ProductList]()
@@ -38,12 +73,15 @@ class reqViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.dataSource = self
         getAllProducts()
         // Do any additional setup after loading the view.
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getAllProducts()
     }
+
+    
     
     @objc private func didTapAdd() {
         let alert = UIAlertController(title: "Adicionar produto", message: nil, preferredStyle: .alert)

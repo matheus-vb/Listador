@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  homeViewController.swift
 //  Grocery_Manager
 //
 //  Created by matheusvb on 19/05/22.
@@ -13,8 +13,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let model = models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
     
+        var qtd: Int32
+        
+        qtd = model.qtdReq - model.qtdHome
+        if qtd < 0 {
+            qtd = 0
+        }
+        
+        cell.textLabel?.text = model.name
+        cell.textLabel?.font = .boldSystemFont(ofSize: 15)
+        cell.detailTextLabel?.text = ("\(qtd)")
+        cell.detailTextLabel?.font = .systemFont(ofSize: 14)
+        
         return cell
     }
     
@@ -22,33 +35,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print ("aa")
     }
     
-    
+
     @IBOutlet var tableView: UITableView!
+    
     private var models = [ProductList]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapRef))
-        navigationItem.rightBarButtonItem?.tintColor = .red
+        tableView.delegate = self
+        tableView.dataSource = self
         getAllProducts()
+        
+        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getAllProducts()
     }
-
-    @objc private func didTapRef() {
-        return
-    }
-
-    //-----------CORE DATA -------------
     
+    
+    //------------CORE DATA---------------
+
     func getAllProducts() {
         do {
             models = try context.fetch(ProductList.fetchRequest())
@@ -120,6 +131,4 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    
 }
-
